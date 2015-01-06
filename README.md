@@ -44,6 +44,10 @@ $oss->uploadFile('robots.txt', public_path('robots.txt'));
 echo $oss->getUrl('robots.txt', new DateTime("+1 day"));
 ```
 
+###捐献Star
+
+> ###别忘了点击上面右侧的 Star 哦，变成 Unstar 就可以了！ :stuck_out_tongue_winking_eye:
+
 ###License
 
 除 “版权所有 （C）阿里云计算有限公司” 的代码文件外，遵循 [MIT license](http://opensource.org/licenses/MIT) 开源。
