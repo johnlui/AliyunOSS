@@ -24,7 +24,7 @@ require: {
 
 ###使用
 
-```json
+```php
 use JohnLui\AliyunOSS\AliyunOSS;
 
 
