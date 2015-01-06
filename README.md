@@ -22,6 +22,8 @@ require: {
 }
 ```
 
+然后运行 `composer dump-autoload`。
+
 ###使用
 
 ```php
