@@ -35,7 +35,7 @@ use JohnLui\AliyunOSS\AliyunOSS;
 $oss = AliyunOSS::boot('http://oss-cn-qingdao.aliyuncs.com',  $AccessKeyId, $AccessKeySecret);
 
 // 设置 Bucket
-$oss->setBucket($bucketName);
+$oss = oss->setBucket($bucketName);
 
 // 上传一个文件（示例文件为 public 目录下的 robots.txt）
 // 两个参数：资源名称、文件路径
