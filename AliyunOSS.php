@@ -53,4 +53,22 @@ class AliyunOSS {
       'Expires' => $expire_time
     ]);
   }
+
+  public function createBucket($bucketName)
+  {
+    return $this->ossClient->createBucket(['Bucket' => $bucketName]);
+  }
+
+  public function getAllObjectKey($bucketName)
+  {
+    $objectListing = $this->ossClient->listObjects(array(
+      'Bucket' => $bucketName,
+    ));
+
+    $objectKeys = [];
+    foreach ($objectListing->getObjectSummarys() as $objectSummary) {
+      $objectKeys[] = $objectSummary->getKey();
+    }
+    return $objectKeys;
+  }
 }
