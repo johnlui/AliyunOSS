@@ -1,10 +1,6 @@
 #AliyunOSS
-<hr>
 
-AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项目，包括 Laravel、Symfony、TinyLara 等等。
-
-
->###2015-01-09 更新：AliyunOSS v1.0 发布，附 Laravel 框架详细使用教程及代码。
+> 最近更新：AliyunOSS v1.0 发布，附 Laravel 框架详细使用教程及代码。
 
 
 ```
@@ -15,6 +11,9 @@ AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项
 /_/  |_|/_/   /_/    \__, /  \__,_/  /_/ /_/        \____/  /____/  /____/
                     /____/
 ```
+
+AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项目，包括 Laravel、Symfony、TinyLara 等等。
+
 
 ##更新记录
 
