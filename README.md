@@ -38,16 +38,25 @@ use JohnLui\AliyunOSS\AliyunOSS;
 // 三个参数：服务器地址、阿里云提供的AccessKeyId、AccessKeySecret
 $oss = AliyunOSS::boot('http://oss-cn-qingdao.aliyuncs.com',  $AccessKeyId, $AccessKeySecret);
 
+// 新增 Bucket
+$oss->createBucket($bucketName);
+
+// 获取某个 Bucket 中所有文件的 key 值
+// 返回：Array
+$keysArray = $oss->getAllObjectKey($bucketName);
+var_dump($keysArray);
+
 // 设置 Bucket
-$oss = $oss->setBucket($bucketName);
+$ossWithBucket = $oss->setBucket($bucketName);
 
 // 上传一个文件（示例文件为 public 目录下的 robots.txt）
 // 两个参数：资源名称、文件路径
-$oss->uploadFile('robots.txt', public_path('robots.txt'));
+$ossWithBucket->uploadFile('robots.txt', public_path('robots.txt'));
 
 // 从服务器获取这个资源的 URL 并打印
-// 两个参数：资源名称、过期时间
-echo $oss->getUrl('robots.txt', new DateTime("+1 day"));
+// 两个参数：资源名称、过期时间。返回：String
+$url = $ossWithBucket->getUrl('robots.txt', new DateTime("+1 day"));
+echo $url;
 ```
 
 ###捐献Star
