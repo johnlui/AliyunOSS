@@ -1,5 +1,11 @@
-AliyunOSS
-====================
+#AliyunOSS
+<hr>
+
+AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项目，包括 Laravel、Symfony、TinyLara 等等。
+
+
+>###2015-01-09 更新：AliyunOSS v1.0 发布，附 Laravel 框架详细使用教程及代码。
+
 
 ```
     ___     __    _                                    ____    _____   _____
@@ -10,13 +16,11 @@ AliyunOSS
                     /____/
 ```
 
-阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项目，包括 Laravel、Symfony、TinyLara 等等。
-
-###更新记录
+##更新记录
 
 * 2015-01-09 `Release v1.0`
 
-###安装
+##安装
 
 将以下内容增加到 composer.json：
 
@@ -28,41 +32,101 @@ require: {
 
 然后运行 `composer dump-autoload`。
 
+##使用（以 Laravel 为例）
+
+###构建 Service 文件
+
+新建 `app/services/OSS.php`，内容可参考：[OSSExample.php](https://github.com/johnlui/AliyunOSS/blob/master/OSSExample.php)：
+
+```php
+<?php
+
+namespace App\Services;
+
+use JohnLui\AliyunOSS\AliyunOSS;
+
+use Config;
+
+class OSS {
+
+  private $ossClient;
+
+  public function __construct()
+  {
+    $this->ossClient = AliyunOSS::boot(
+      Config::get('app.ossServerInternal'),
+      Config::get('app.AccessKeyId'),
+      Config::get('app.AccessKeySecret')
+    );
+  }
+
+  public static function upload($ossKey, $filePath)
+  {
+    $oss = new OSS();
+    $oss->ossClient->setBucket('提前设置好的Bucket的名称');
+    $oss->ossClient->uploadFile($ossKey, $filePath);
+  }
+
+  public static function getUrl($ossKey)
+  {
+    $oss = new OSS();
+    $oss->ossClient->setBucket('提前设置好的Bucket的名称');
+    return $oss->ossClient->getUrl($ossKey, new \DateTime("+1 day"));
+  }
+
+  public static function createBucket($bucketName)
+  {
+    $oss = new OSS();
+    return $oss->ossClient->createBucket($bucketName);
+  }
+
+  public static function getAllObjectKey($bucketName)
+  {
+    $oss = new OSS();
+    return $oss->ossClient->getAllObjectKey($bucketName);
+  }
+
+}
+```
+
+###放入自动加载
+
+在 `composer.json` 中 `autoload -> classmap` 处增加配置：
+
+```json
+"autoload": {
+    "classmap": [
+      "app/services"
+    ]
+  }
+```
+然后运行 `composer dump-autoload`。
+
+###增加相关配置
+在 app/config/app.php 中增加三项配置：
+
+```php
+'ossServerInternal' => '服务器内网地址', //青岛为 http://oss-cn-qingdao-internal.aliyuncs.com
+'AccessKeyId' => '阿里云给的AccessKeyId',
+'AccessKeySecret' => '阿里云给的AccessKeySecret',
+```
+
 ###使用
 
 ```php
-use JohnLui\AliyunOSS\AliyunOSS;
+use App\Services\OSS;
 
+OSS::upload('文件名', '本地路径'); // 上传一个文件
 
-// 构建 OSSClient 对象
-// 三个参数：服务器地址、阿里云提供的AccessKeyId、AccessKeySecret
-$oss = AliyunOSS::boot('http://oss-cn-qingdao.aliyuncs.com',  $AccessKeyId, $AccessKeySecret);
+echo OSS::getUrl('某个文件的名称'); // 打印出某个文件的外网链接
 
-// 新增 Bucket
-$oss->createBucket($bucketName);
+OSS::createBucket('一个字符串'); // 新增一个 Bucket。注意，Bucket 名称具有全局唯一性，也就是说跟其他人的 Bucket 名称也不能相同。
 
-// 获取某个 Bucket 中所有文件的 key 值
-// 返回：Array
-$keysArray = $oss->getAllObjectKey($bucketName);
-var_dump($keysArray);
-
-// 设置 Bucket
-$ossWithBucket = $oss->setBucket($bucketName);
-
-// 上传一个文件（示例文件为 public 目录下的 robots.txt）
-// 两个参数：资源名称、文件路径
-$ossWithBucket->uploadFile('robots.txt', public_path('robots.txt'));
-
-// 从服务器获取这个资源的 URL 并打印
-// 两个参数：资源名称、过期时间。返回：String
-$url = $ossWithBucket->getUrl('robots.txt', new DateTime("+1 day"));
-echo $url;
+OSS::getAllObjectKey('某个 Bucket 名称'); // 获取该 Bucket 中所有文件的文件名，返回 Array。
 ```
+##反馈
 
-###捐献Star
+有问题请到 http://lvwenhan.com/laravel/425.html 下面留言。
 
-> ###别忘了点击上面右侧的 Star 哦，变成 Unstar 就可以了！ :stuck_out_tongue_winking_eye:
-
-###License
-
-除 “版权所有 （C）阿里云计算有限公司” 的代码文件外，遵循 [MIT license](http://opensource.org/licenses/MIT) 开源。
+##License
+除 “版权所有（C）阿里云计算有限公司” 的代码文件外，遵循 [MIT license](http://opensource.org/licenses/MIT) 开源。
