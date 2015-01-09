@@ -12,13 +12,17 @@ AliyunOSS
 
 阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项目，包括 Laravel、Symfony、TinyLara 等等。
 
+###更新记录
+
+* 2015-01-09 `Release v1.0`
+
 ###安装
 
 将以下内容增加到 composer.json：
 
 ```json
 require: {
-    "johnlui/aliyun-oss": "dev-master"
+    "johnlui/aliyun-oss": "1.0"
 }
 ```
 
