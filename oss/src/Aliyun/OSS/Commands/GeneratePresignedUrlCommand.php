@@ -76,8 +76,7 @@ class GeneratePresignedUrlCommand {
         $expires = (string) $expires->getTimeStamp();
 
         $builder = OSSRequestBuilder::factory()
-            // ->setEndpoint($options[OSSOptions::ENDPOINT])
-            ->setEndpoint('http://oss-cn-qingdao.aliyuncs.com') //只在生成外网链接时候使用外网
+            ->setEndpoint($options[OSSOptions::ENDPOINT])
             ->setBucket($bucket)
             ->setKey($key)
             ->setMethod($method)

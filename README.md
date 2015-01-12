@@ -1,6 +1,6 @@
 #AliyunOSS
 
-> 最近更新：AliyunOSS v1.0 发布，附 Laravel 框架详细使用教程及代码。
+> 最近更新：AliyunOSS v1.1 发布，增加内外网配置分离。
 
 
 ```
@@ -17,7 +17,8 @@ AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项
 
 ##更新记录
 
-* 2015-01-09 `Release v1.0`
+* 2015-01-12 `Release v1.1` 增加内外网配置分离。
+* 2015-01-09 `Release v1.0` 完善功能，增加 Laravel 框架详细使用教程及代码。
 
 ##安装
 
@@ -25,7 +26,7 @@ AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项
 
 ```json
 require: {
-    "johnlui/aliyun-oss": "1.0"
+    "johnlui/aliyun-oss": "1.1"
 }
 ```
 
@@ -50,10 +51,11 @@ class OSS {
 
   private $ossClient;
 
-  public function __construct()
+  public function __construct($isInternal = false)
   {
+    $serverAddress = $isInternal ? Config::get('app.ossServerInternal') : Config::get('app.ossServer');
     $this->ossClient = AliyunOSS::boot(
-      Config::get('app.ossServerInternal'),
+      $serverAddress,
       Config::get('app.AccessKeyId'),
       Config::get('app.AccessKeySecret')
     );
@@ -61,7 +63,7 @@ class OSS {
 
   public static function upload($ossKey, $filePath)
   {
-    $oss = new OSS();
+    $oss = new OSS(true); // 上传文件使用内网，免流量费
     $oss->ossClient->setBucket('提前设置好的Bucket的名称');
     $oss->ossClient->uploadFile($ossKey, $filePath);
   }
@@ -105,6 +107,7 @@ class OSS {
 在 app/config/app.php 中增加三项配置：
 
 ```php
+'ossServer' => '服务器外网地址', //青岛为 http://oss-cn-qingdao.aliyuncs.com
 'ossServerInternal' => '服务器内网地址', //青岛为 http://oss-cn-qingdao-internal.aliyuncs.com
 'AccessKeyId' => '阿里云给的AccessKeyId',
 'AccessKeySecret' => '阿里云给的AccessKeySecret',
