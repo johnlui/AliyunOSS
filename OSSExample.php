@@ -1,9 +1,8 @@
-<?php
+<?php namespace App\Services;
 
-namespace App\Services;
+include __DIR__.'/vendor/autoload.php';
 
 use JohnLui\AliyunOSS\AliyunOSS;
-
 use Config;
 
 class OSS {

@@ -2,8 +2,6 @@
 
 namespace JohnLui\AliyunOSS;
 
-require_once __DIR__.'/oss/aliyun.php';
-
 use Aliyun\OSS\OSSClient;
 use \Aliyun\OSS\Models\OSSOptions;
 
