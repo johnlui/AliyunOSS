@@ -6,7 +6,8 @@
   "homepage": "https://github.com/johnlui/AliyunOSS",
   "license": "MIT",
   "require": {
-    "php": ">=5.4.0"
+    "php": ">=5.4.0",
+    "naux/oss": "~1.0"
   },
   "authors": [
       {
