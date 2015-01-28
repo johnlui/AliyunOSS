@@ -2,7 +2,7 @@
 
 namespace JohnLui\AliyunOSS;
 
-use Aliyun\OSS\OSSClient;
+use \Aliyun\OSS\OSSClient;
 use \Aliyun\OSS\Models\OSSOptions;
 
 /**
