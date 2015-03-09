@@ -104,7 +104,7 @@ class OSS {
 然后运行 `composer dump-autoload`。
 
 ###增加相关配置
-在 app/config/app.php 中增加三项配置：
+在 app/config/app.php 中增加四项配置：
 
 ```php
 'ossServer' => '服务器外网地址', //青岛为 http://oss-cn-qingdao.aliyuncs.com
