@@ -30,7 +30,7 @@ require: {
 }
 ```
 
-然后运行 `composer dump-autoload`。
+然后运行 `composer update`。
 
 ##使用（以 Laravel 为例）
 
