@@ -26,6 +26,17 @@ class OSS {
     $oss->ossClient->setBucket('yishuodian-test');
     $oss->ossClient->uploadFile($ossKey, $filePath);
   }
+  /**
+   * 直接把变量内容上传到oss
+   * @param $osskey
+   * @param $content
+   */
+  public static function uploadContent($osskey,$content)
+  {
+    $oss = new OSS(true); // 上传文件使用内网，免流量费
+    $oss->ossClient->setBucket('yishuodian-test');
+    $oss->ossClient->uploadContent($osskey,$content);
+  }
 
   public static function getUrl($ossKey)
   {
