@@ -16,7 +16,7 @@ AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项
 
 
 ##更新记录
-
+* 2015-06-17 `Release v1.1.1` 增加了直接将变量作为文件内容存储到oss的方法
 * 2015-01-12 `Release v1.1` 增加内外网配置分离。
 * 2015-01-09 `Release v1.0` 完善功能，增加 Laravel 框架详细使用教程及代码。
 
@@ -26,7 +26,7 @@ AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项
 
 ```json
 require: {
-    "johnlui/aliyun-oss": "1.1"
+    "haogeqiu/Aliyun-OSS": "1.1.1"
 }
 ```
 
@@ -66,6 +66,17 @@ class OSS {
     $oss = new OSS(true); // 上传文件使用内网，免流量费
     $oss->ossClient->setBucket('提前设置好的Bucket的名称');
     $oss->ossClient->uploadFile($ossKey, $filePath);
+  }
+  /**
+     * 直接把变量内容上传到oss
+     * @param $osskey
+     * @param $content
+     */
+  public static function uploadContent($osskey,$content)
+  {
+    $oss = new OSS(true); // 上传文件使用内网，免流量费
+    $oss->ossClient->setBucket('yishuodian-test');
+    $oss->ossClient->uploadContent($osskey,$content);
   }
 
   public static function getUrl($ossKey)

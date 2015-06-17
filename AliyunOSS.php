@@ -45,6 +45,16 @@ class AliyunOSS {
     ));
   }
 
+  public function uploadContent($key, $content)
+  {
+    return $this->ossClient->putObject(array(
+        'Bucket' => $this->bucket,
+        'Key' => $key,
+        'Content' => $content,
+        'ContentLength' => strlen($content)
+    ));
+  }
+
   public function getUrl($key, $expire_time)
   {
     return $this->ossClient->generatePresignedUrl([
