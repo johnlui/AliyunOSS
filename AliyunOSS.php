@@ -37,12 +37,15 @@ class AliyunOSS {
 
   public function uploadFile($key, $file)
   {
-    return $this->ossClient->putObject(array(
+    $handle = fopen($file, 'r');
+    $value = $this->ossClient->putObject(array(
         'Bucket' => $this->bucket,
         'Key' => $key,
-        'Content' => fopen($file, 'r'),
+        'Content' => $handle,
         'ContentLength' => filesize($file)
     ));
+    fclose($handle);
+    return $value;
   }
 
   public function uploadContent($key, $content)
