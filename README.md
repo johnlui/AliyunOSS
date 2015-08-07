@@ -17,6 +17,7 @@ AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项
 
 ##更新记录
 
+* 2015-08-07 `Release v1.2` 修复内存泄露 bug。
 * 2015-01-12 `Release v1.1` 增加内外网配置分离。
 * 2015-01-09 `Release v1.0` 完善功能，增加 Laravel 框架详细使用教程及代码。
 
@@ -26,7 +27,7 @@ AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项
 
 ```json
 require: {
-    "johnlui/aliyun-oss": "1.1"
+    "johnlui/aliyun-oss": "1.2"
 }
 ```
 
