@@ -38,6 +38,51 @@ class OSS {
     $oss->ossClient->uploadContent($osskey,$content);
   }
 
+  /**
+   * 删除存储在oss中的文件
+   *
+   * @param string $ossKey 存储的key（文件路径和文件名）
+   * @return
+   */
+  public static function deleteObject($ossKey)
+  {
+      $oss = new OSS(true); // 上传文件使用内网，免流量费
+
+      return $oss->ossClient->deleteObject('your-bucket-name', $ossKey);
+  }
+
+  /**
+   * 复制存储在阿里云OSS中的Object
+   *
+   * @param string $sourceBuckt 复制的源Bucket
+   * @param string $sourceKey - 复制的的源Object的Key
+   * @param string $destBucket - 复制的目的Bucket
+   * @param string $destKey - 复制的目的Object的Key
+   * @return Models\CopyObjectResult
+   */
+  public function copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey)
+  {
+      $oss = new OSS(true); // 上传文件使用内网，免流量费
+
+      return $oss->ossClient->copyObject('your-source-bucket-name', $sourceKey, 'your-dest-bucket-name', $destKey);
+  }
+
+  /**
+   * 移动存储在阿里云OSS中的Object
+   *
+   * @param string $sourceBuckt 复制的源Bucket
+   * @param string $sourceKey - 复制的的源Object的Key
+   * @param string $destBucket - 复制的目的Bucket
+   * @param string $destKey - 复制的目的Object的Key
+   * @return Models\CopyObjectResult
+   */
+  public function moveObject($sourceBuckt, $sourceKey, $destBucket, $destKey)
+  {
+      $oss = new OSS(true); // 上传文件使用内网，免流量费
+
+      return $oss->ossClient->moveObject('your-source-bucket-name', $sourceKey, 'your-dest-bucket-name', $destKey);
+  }
+
   public static function getUrl($ossKey)
   {
     $oss = new OSS();
