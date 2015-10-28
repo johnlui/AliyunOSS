@@ -67,7 +67,7 @@ class OSS {
   public static function upload($ossKey, $filePath)
   {
     $oss = new OSS(true); // 上传文件使用内网，免流量费
-    $oss->ossClient->setBucket('yishuodian-test');
+    $oss->ossClient->setBucket('你的 bucket 名称');
     $oss->ossClient->uploadFile($ossKey, $filePath);
   }
   /**
@@ -78,7 +78,7 @@ class OSS {
   public static function uploadContent($osskey,$content)
   {
     $oss = new OSS(true); // 上传文件使用内网，免流量费
-    $oss->ossClient->setBucket('yishuodian-test');
+    $oss->ossClient->setBucket('你的 bucket 名称');
     $oss->ossClient->uploadContent($osskey,$content);
   }
 
@@ -92,7 +92,7 @@ class OSS {
   {
       $oss = new OSS(true); // 上传文件使用内网，免流量费
 
-      return $oss->ossClient->deleteObject('your-bucket-name', $ossKey);
+      return $oss->ossClient->deleteObject('你的 bucket 名称', $ossKey);
   }
 
   /**
@@ -108,7 +108,7 @@ class OSS {
   {
       $oss = new OSS(true); // 上传文件使用内网，免流量费
 
-      return $oss->ossClient->copyObject('your-source-bucket-name', $sourceKey, 'your-dest-bucket-name', $destKey);
+      return $oss->ossClient->copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey);
   }
 
   /**
@@ -124,13 +124,13 @@ class OSS {
   {
       $oss = new OSS(true); // 上传文件使用内网，免流量费
 
-      return $oss->ossClient->moveObject('your-source-bucket-name', $sourceKey, 'your-dest-bucket-name', $destKey);
+      return $oss->ossClient->moveObject($sourceBuckt, $sourceKey, $destBucket, $destKey);
   }
 
   public static function getUrl($ossKey)
   {
     $oss = new OSS();
-    $oss->ossClient->setBucket('yishuodian-test');
+    $oss->ossClient->setBucket('你的 bucket 名称');
     return $oss->ossClient->getUrl($ossKey, new \DateTime("+1 day"));
   }
 
