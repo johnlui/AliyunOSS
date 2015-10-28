@@ -64,7 +64,7 @@ class OSS {
   {
       $oss = new OSS(true); // 上传文件使用内网，免流量费
 
-      return $oss->ossClient->copyObject('your-source-bucket-name', $sourceKey, 'your-dest-bucket-name', $destKey);
+      return $oss->ossClient->copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey);
   }
 
   /**
@@ -80,7 +80,7 @@ class OSS {
   {
       $oss = new OSS(true); // 上传文件使用内网，免流量费
 
-      return $oss->ossClient->moveObject('your-source-bucket-name', $sourceKey, 'your-dest-bucket-name', $destKey);
+      return $oss->ossClient->moveObject($sourceBuckt, $sourceKey, $destBucket, $destKey);
   }
 
   public static function getUrl($ossKey)
