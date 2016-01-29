@@ -84,6 +84,38 @@ class AliyunOSS {
     }
     return $objectKeys;
   }
+
+  /**
+   * 获取指定文件夹下的所有文件
+   *
+   * @param string $bucketName 存储容器名称
+   * @param string $folder_name 文件夹名
+   * @return 指定文件夹下的所有文件
+   */
+  public function getAllObjectKeyWithPrefix($bucketName, $folder_name, $nextMarker='')
+  {
+
+    $objectKeys = [];
+
+    while (true){
+      $objectListing = $this->ossClient->listObjects(array(
+        'Bucket' => $bucketName,
+        'Prefix' => $folder_name,
+        'MaxKeys' => 1000,
+        'Marker' => $nextMarker,
+      ));
+
+      foreach ($objectListing->getObjectSummarys() as $objectSummary) {
+        $objectKeys[] = $objectSummary->getKey();
+      }
+
+      $nextMarker = $objectListing->getNextMarker();
+      if ($nextMarker === '' || is_null($nextMarker)) {
+        break;
+      }
+    }
+    return $objectKeys;
+  }
     
   /**
    * 删除阿里云中存储的文件
