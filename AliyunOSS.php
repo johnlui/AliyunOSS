@@ -84,6 +84,18 @@ class AliyunOSS {
     }
     return $objectKeys;
   }
+
+  public function getAllObjectKeyWithPrefix($bucketName, $prefix, $marker)
+  {
+    $objectListing = $this->ossClient->listObjects(array(
+      'Bucket' => $bucketName,
+      'Prefix' => $prefix,
+      'MaxKeys' => 1000,
+      'Marker' => $marker,
+    ));
+
+    return $objectListing;
+  }
     
   /**
    * 删除阿里云中存储的文件
