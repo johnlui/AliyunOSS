@@ -85,16 +85,36 @@ class AliyunOSS {
     return $objectKeys;
   }
 
-  public function getAllObjectKeyWithPrefix($bucketName, $prefix, $marker)
+  /**
+   * 获取指定文件夹下的所有文件
+   *
+   * @param string $bucketName 存储容器名称
+   * @param string $folder_name 文件夹名
+   * @return 指定文件夹下的所有文件
+   */
+  public function getAllObjectKeyWithPrefix($bucketName, $folder_name, $nextMarker='')
   {
-    $objectListing = $this->ossClient->listObjects(array(
-      'Bucket' => $bucketName,
-      'Prefix' => $prefix,
-      'MaxKeys' => 1000,
-      'Marker' => $marker,
-    ));
 
-    return $objectListing;
+    $objectKeys = [];
+
+    while (true){
+      $objectListing = $this->ossClient->listObjects(array(
+        'Bucket' => $bucketName,
+        'Prefix' => $folder_name,
+        'MaxKeys' => 1000,
+        'Marker' => $nextMarker,
+      ));
+
+      foreach ($objectListing->getObjectSummarys() as $objectSummary) {
+        $objectKeys[] = $objectSummary->getKey();
+      }
+
+      $nextMarker = $objectListing->getNextMarker();
+      if ($nextMarker === '' || is_null($nextMarker)) {
+        break;
+      }
+    }
+    return $objectKeys;
   }
     
   /**
