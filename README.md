@@ -171,8 +171,8 @@ class OSS {
 在 app/config/app.php 中增加四项配置：
 
 ```php
-'ossServer' => '服务器外网地址', //青岛为 http://oss-cn-qingdao.aliyuncs.com
-'ossServerInternal' => '服务器内网地址', //青岛为 http://oss-cn-qingdao-internal.aliyuncs.com
+'ossServer' => 'http://服务器外网地址', //青岛为 http://oss-cn-qingdao.aliyuncs.com
+'ossServerInternal' => 'http://服务器内网地址', //青岛为 http://oss-cn-qingdao-internal.aliyuncs.com
 'AccessKeyId' => '阿里云给的AccessKeyId',
 'AccessKeySecret' => '阿里云给的AccessKeySecret',
 ```
