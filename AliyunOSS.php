@@ -191,4 +191,23 @@ class AliyunOSS {
       
       return $result;
   }
+
+  /**
+   * 获取指定存储容器下的某个文件的元信息
+   * 
+   * @param string $bucketName 存储容器名称
+   * @param string $key 存储key（文件的路径和文件名）
+   * @return
+   */
+  public function getObjectMeta($bucketName, $key)
+  {
+      if ($bucketName === null) {
+          $bucketName = $this->bucket;
+      }
+
+      return $this->ossClient->getObjectMetadata([
+          'Bucket' => $bucketName,
+          'Key' => $key,
+      ]);
+  }
 }
