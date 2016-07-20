@@ -146,6 +146,18 @@ class OSS {
     return $oss->ossClient->getAllObjectKey($bucketName);
   }
 
+  /**
+   * 获取指定Object的元信息
+   * 
+   * @param  string $bucketName 源Bucket名称
+   * @param  string $key 存储的key（文件路径和文件名）
+   * @return object 元信息
+   */
+  public static function getObjectMeta($bucketName, $osskey)
+  {
+      $oss = new OSS();
+      return $oss->ossClient->getObjectMeta($bucketName, $osskey);
+  }
 }
 ```
 
