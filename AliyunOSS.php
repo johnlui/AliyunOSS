@@ -44,7 +44,7 @@ class AliyunOSS
         $content_type = [
             'mp4'  => "video/mp4",
             'jpeg' => "image/jpeg",
-            'gif'  => "video/gif",
+            'gif'  => "image/gif",
         ];
         $final_extend = isset( $content_type[$extend] ) ? $content_type[$extend] : false;
         $handle       = fopen($file, 'r');
