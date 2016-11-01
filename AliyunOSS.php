@@ -38,13 +38,28 @@ class AliyunOSS
 
     public function uploadFile($key, $file, $options = [])
     {
-        $handle = fopen($file, 'r');
-        $value  = $this->ossClient->putObject(array_merge([
+        $file_extend  = explode('.', $key);
+        $extend       = $file_extend[count($file_extend) - 1];
+        //dd($extend);
+        $content_type = [
+            'mp4'  => "video/mp4",
+            'jpeg' => "image/jpeg",
+            'gif'  => "video/gif",
+        ];
+        $final_extend = isset( $content_type[$extend] ) ? $content_type[$extend] : false;
+        $handle       = fopen($file, 'r');
+        $option       = array(
             'Bucket'        => $this->bucket,
             'Key'           => $key,
             'Content'       => $handle,
-            'ContentLength' => filesize($file),
-        ], $options));
+            'ContentLength' => filesize($file)
+        );
+
+        if ($final_extend) {
+            $option['ContentType'] = $final_extend;
+        }
+
+        $value = $this->ossClient->putObject($option);
         fclose($handle);
 
         return $value;
