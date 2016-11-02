@@ -1,6 +1,6 @@
 <?php
 
-namespace JohnLui\AliyunOSS;
+namespace EmptyWang\AliyunOSS;
 
 require_once __DIR__.'/oss/aliyun.php';
 
