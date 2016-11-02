@@ -1,20 +1,20 @@
 {
-  "name": "johnlui/aliyun-oss",
+  "name": "emptyWang/aliyun-oss",
   "type": "library",
   "description": "阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项目，包括 Laravel、Symfony、TinyLara 等等。",
   "keywords": ["AliyunOSS", "aliyun", "OSS"],
-  "homepage": "https://github.com/johnlui/AliyunOSS",
+  "homepage": "https://github.com/emptyWang/AliyunOSS",
   "license": "MIT",
   "require": {
     "php": ">=5.4.0"
   },
   "authors": [
       {
-          "name": "John Lui",
-          "email": "wenhanlv@gmail.com"
+          "name": "emptyWang",
+          "email": "guniyige@gmail.com"
       }
   ],
   "autoload": {
-    "psr-4": {"JohnLui\\AliyunOSS\\": ""}
+    "psr-4": {"EmptyWang\\AliyunOSS\\": ""}
   }
 }
