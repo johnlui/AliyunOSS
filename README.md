@@ -209,8 +209,16 @@ OSS::createBucket('一个字符串');
 OSS::getAllObjectKey('某个 Bucket 名称'); 
 
 // 指定 options 如：Content-Type 类型
-OSS::upload('文件名', '文件路径', ['ContentType' => 'application/pdf'])
+OSS::upload('文件名', '文件路径', [
+    'ContentType' => 'application/pdf',
+    // ...
+    
+])
 ```
+
+> 更多上传参数见：[这里](https://github.com/johnlui/AliyunOSS/blob/master/oss/src/Aliyun/OSS/OSSClient.php#L142-L148)
+> 更多使用方法见：[这里](https://github.com/johnlui/AliyunOSS/blob/master/OSSExample.php)
+
 ## 反馈
 
 有问题请到 http://lvwenhan.com/laravel/425.html 下面留言。
