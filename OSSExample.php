@@ -24,7 +24,7 @@ class OSS {
   {
     $oss = new OSS(true); // 上传文件使用内网，免流量费
     $oss->ossClient->setBucket('你的 bucket 名称');
-    $oss->ossClient->uploadFile($ossKey, $filePath);
+    return $oss->ossClient->uploadFile($ossKey, $filePath);
   }
   /**
    * 直接把变量内容上传到oss
@@ -35,7 +35,7 @@ class OSS {
   {
     $oss = new OSS(true); // 上传文件使用内网，免流量费
     $oss->ossClient->setBucket('你的 bucket 名称');
-    $oss->ossClient->uploadContent($osskey,$content);
+    return $oss->ossClient->uploadContent($osskey,$content);
   }
 
   /**
