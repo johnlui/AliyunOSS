@@ -68,7 +68,7 @@ class OSS {
   {
     $oss = new OSS(true); // 上传文件使用内网，免流量费
     $oss->ossClient->setBucket('你的 bucket 名称');
-    $oss->ossClient->uploadFile($ossKey, $filePath);
+    return $oss->ossClient->uploadFile($ossKey, $filePath);
   }
   /**
    * 直接把变量内容上传到oss
@@ -79,7 +79,7 @@ class OSS {
   {
     $oss = new OSS(true); // 上传文件使用内网，免流量费
     $oss->ossClient->setBucket('你的 bucket 名称');
-    $oss->ossClient->uploadContent($osskey,$content);
+    return $oss->ossClient->uploadContent($osskey,$content);
   }
 
   /**
@@ -183,6 +183,8 @@ class OSS {
 在 app/config/app.php 中增加四项配置：
 
 ```php
+# 注意在设置『内网』和『外网』的时候，地址不要加上 bucketName
+
 'ossServer' => 'http://服务器外网地址', //青岛为 http://oss-cn-qingdao.aliyuncs.com
 'ossServerInternal' => 'http://服务器内网地址', //青岛为 http://oss-cn-qingdao-internal.aliyuncs.com
 'AccessKeyId' => '阿里云给的AccessKeyId',
@@ -194,17 +196,34 @@ class OSS {
 ```php
 use App\Services\OSS;
 
-OSS::upload('文件名', '本地路径'); // 上传一个文件
+// 上传一个文件
+OSS::upload('文件名', '本地路径');
 
-echo OSS::getUrl('某个文件的名称'); // 打印出某个文件的外网链接
+// 打印出某个文件的外网链接
+echo OSS::getUrl('某个文件的名称');
 
-OSS::createBucket('一个字符串'); // 新增一个 Bucket。注意，Bucket 名称具有全局唯一性，也就是说跟其他人的 Bucket 名称也不能相同。
+// 新增一个 Bucket。注意，Bucket 名称具有全局唯一性，也就是说跟其他人的 Bucket 名称也不能相同。
+OSS::createBucket('一个字符串');
 
-OSS::getAllObjectKey('某个 Bucket 名称'); // 获取该 Bucket 中所有文件的文件名，返回 Array。
+// 获取该 Bucket 中所有文件的文件名，返回 Array。
+OSS::getAllObjectKey('某个 Bucket 名称'); 
+
+// 指定 options 如：Content-Type 类型
+OSS::upload('文件名', '文件路径', [
+    'ContentType' => 'application/pdf',
+    // ...
+    
+])
 ```
+
+> 更多上传参数见：[这里](https://github.com/johnlui/AliyunOSS/blob/master/oss/src/Aliyun/OSS/OSSClient.php#L142-L148)
+> 更多使用方法见：[这里](https://github.com/johnlui/AliyunOSS/blob/master/OSSExample.php)
+
 ## 反馈
 
 有问题请到 http://lvwenhan.com/laravel/425.html 下面留言。
 
 ## License
 除 “版权所有（C）阿里云计算有限公司” 的代码文件外，遵循 [MIT license](http://opensource.org/licenses/MIT) 开源。
+
+
