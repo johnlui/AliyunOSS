@@ -68,7 +68,7 @@ class OSS {
   {
     $oss = new OSS(true); // 上传文件使用内网，免流量费
     $oss->ossClient->setBucket('你的 bucket 名称');
-    $oss->ossClient->uploadFile($ossKey, $filePath);
+    return $oss->ossClient->uploadFile($ossKey, $filePath);
   }
   /**
    * 直接把变量内容上传到oss
@@ -79,7 +79,7 @@ class OSS {
   {
     $oss = new OSS(true); // 上传文件使用内网，免流量费
     $oss->ossClient->setBucket('你的 bucket 名称');
-    $oss->ossClient->uploadContent($osskey,$content);
+    return $oss->ossClient->uploadContent($osskey,$content);
   }
 
   /**
@@ -183,6 +183,8 @@ class OSS {
 在 app/config/app.php 中增加四项配置：
 
 ```php
+# 注意在设置『内网』和『外网』的时候，地址不要加上 bucketName
+
 'ossServer' => 'http://服务器外网地址', //青岛为 http://oss-cn-qingdao.aliyuncs.com
 'ossServerInternal' => 'http://服务器内网地址', //青岛为 http://oss-cn-qingdao-internal.aliyuncs.com
 'AccessKeyId' => '阿里云给的AccessKeyId',
@@ -206,7 +208,7 @@ OSS::createBucket('一个字符串');
 // 获取该 Bucket 中所有文件的文件名，返回 Array。
 OSS::getAllObjectKey('某个 Bucket 名称'); 
 
-// 制定 options 如：Content-Type 类型
+// 指定 options 如：Content-Type 类型
 OSS::upload('文件名', '文件路径', ['ContentType' => 'application/pdf'])
 ```
 ## 反馈
