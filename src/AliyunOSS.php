@@ -13,6 +13,8 @@ use Aliyun\OSS\Models\OSSOptions;
  */
 class AliyunOSS
 {
+  protected $city;
+  protected $networkType;
   protected $ossClient;
   protected $bucket;
 
@@ -51,18 +53,21 @@ class AliyunOSS
 
   public function __construct($city, $networkType, $isInternal, $AccessKeyId, $AccessKeySecret)
   {
-    $serverAddress = '';
+    $this->city = $city;
+    $this->networkType = $networkType;
+
+    $serverAddress = 'http://';
     if ($networkType == '经典网络') {
-      if (!array_key_exists($city, $this->CityURLArrayFor)) {
+      if (!array_key_exists($city, $this->CityURLArray)) {
         throw new Exception("城市不存在");
       }
-      $uriPrefix = $this->$CityURLArray[$city];
-      $uriSubfix = $isInternal ? '-internal' : '';
+      $serverAddress .= $this->CityURLArray[$city];
+      $serverAddress .= $isInternal ? '-internal' : '';
     } else if ($networkType == 'VPC') {
       if (!array_key_exists($city, $this->CityURLArrayForVPC)) {
         throw new Exception("城市不存在");
       }
-      $uriPrefix = $this->CityURLArrayForVPC[$city];
+      $serverAddress .= $this->CityURLArrayForVPC[$city];
     } else {
       throw new Exception("\$networkType 必须是 '经典网络' 或 'VPC'");
     }
@@ -75,9 +80,9 @@ class AliyunOSS
     ]);
   }
 
-  public static function boot($serverName, $AccessKeyId, $AccessKeySecret)
+  public static function boot($city, $networkType, $isInternal, $AccessKeyId, $AccessKeySecret)
   {
-    return new self($serverName, $AccessKeyId, $AccessKeySecret);
+    return new self($city, $networkType, $isInternal, $AccessKeyId, $AccessKeySecret);
   }
 
   public function setBucket($bucket)
@@ -91,9 +96,9 @@ class AliyunOSS
   {
     $handle = fopen($file, 'r');
     $value  = $this->ossClient->putObject(array_merge([
-      'Bucket'    => $this->bucket,
-      'Key'     => $key,
-      'Content'    => $handle,
+      'Bucket'        => $this->bucket,
+      'Key'           => $key,
+      'Content'       => $handle,
       'ContentLength' => filesize($file),
     ], $options));
     fclose($handle);
@@ -104,18 +109,31 @@ class AliyunOSS
   public function uploadContent($key, $content, $options = [])
   {
     return $this->ossClient->putObject(array_merge([
-      'Bucket'    => $this->bucket,
-      'Key'     => $key,
-      'Content'    => $content,
+      'Bucket'        => $this->bucket,
+      'Key'           => $key,
+      'Content'       => $content,
       'ContentLength' => strlen($content),
     ], $options));
+  }
+
+  public function getPublicUrl($key)
+  {
+    if ($this->networkType == 'VPC') {
+      throw new Exception("经典网络才能获取公开 api");
+    }
+    
+    if (!array_key_exists($this->city, $this->CityURLArray)) {
+      throw new Exception("城市不存在");
+    }
+
+    return 'http://'.$this->bucket.'.'.$this->CityURLArray[$this->city].'.aliyuncs.com'.'/'.$key;
   }
 
   public function getUrl($key, $expire_time)
   {
     return $this->ossClient->generatePresignedUrl([
       'Bucket'  => $this->bucket,
-      'Key'  => $key,
+      'Key'     => $key,
       'Expires' => $expire_time,
     ]);
   }
@@ -185,7 +203,7 @@ class AliyunOSS
     }
 
     return $this->ossClient->deleteObject([
-      'Bucket'  => $bucketName,
+      'Bucket' => $bucketName,
       'Key'    => $key,
     ]);
   }
@@ -209,10 +227,10 @@ class AliyunOSS
     }
 
     return $this->ossClient->copyObject([
-      'SourceBucket'  => $sourceBuckt,
-      'SourceKey'  => $sourceKey,
-      'DestBucket'  => $destBucket,
-      'DestKey'    => $destKey,
+      'SourceBucket' => $sourceBuckt,
+      'SourceKey'    => $sourceKey,
+      'DestBucket'   => $destBucket,
+      'DestKey'      => $destKey,
     ]);
   }
 
@@ -235,10 +253,10 @@ class AliyunOSS
     }
 
     $result = $this->ossClient->copyObject([
-      'SourceBucket'  => $sourceBuckt,
-      'SourceKey'  => $sourceKey,
-      'DestBucket'  => $destBucket,
-      'DestKey'    => $destKey,
+      'SourceBucket' => $sourceBuckt,
+      'SourceKey'    => $sourceKey,
+      'DestBucket'   => $destBucket,
+      'DestKey'      => $destKey,
     ]);
 
     if (is_object($result) && $result->getETag()) {

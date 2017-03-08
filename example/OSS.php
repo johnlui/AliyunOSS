@@ -4,8 +4,6 @@ namespace App\Services;
 
 use JohnLui\AliyunOSS;
 
-use Config;
-
 class OSS {
 
   /* 城市名称：
@@ -30,15 +28,15 @@ class OSS {
    */
   public function __construct($isInternal = false)
   {
-    if ($this->$networkType == 'VPC' && !$isInternal) {
+    if ($this->networkType == 'VPC' && !$isInternal) {
       throw new Exception("VPC 网络下不提供外网上传、下载等功能");
     }
     $this->ossClient = AliyunOSS::boot(
-      $this->$city,
-      $this->$networkType,
+      $this->city,
+      $this->networkType,
       $isInternal,
       $this->AccessKeyId,
-      $this->AccessKeySecret,
+      $this->AccessKeySecret
     );
   }
 
@@ -151,14 +149,14 @@ class OSS {
   }
 
   // 获取公开文件的 URL
-  public static function getPublicObjectURL($ossKey)
+  public static function getPublicObjectURL($bucketName, $ossKey)
   {
     $oss = new OSS();
     $oss->ossClient->setBucket($bucketName);
     return $oss->ossClient->getUrl($ossKey);
   }
   // 获取私有文件的URL，并设定过期时间，如 \DateTime('+1 day')
-  public static function getPrivateObjectURLWithExpireTime($ossKey, DateTime $expire_time)
+  public static function getPrivateObjectURLWithExpireTime($bucketName, $ossKey, DateTime $expire_time)
   {
     $oss = new OSS();
     $oss->ossClient->setBucket($bucketName);
