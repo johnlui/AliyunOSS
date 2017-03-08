@@ -50,11 +50,11 @@ class OSS {
    * @param  string 删除文件路径
    * @return boolean 上传是否成功
    */
-  public static function publicUpload($bucketName, $ossKey, $filePath)
+  public static function publicUpload($bucketName, $ossKey, $filePath, $options = [])
   {
     $oss = new OSS();
     $oss->ossClient->setBucket($bucketName);
-    return $oss->ossClient->uploadFile($ossKey, $filePath);
+    return $oss->ossClient->uploadFile($ossKey, $filePath, $options);
   }
 
   /**
@@ -64,11 +64,11 @@ class OSS {
    * @param  string 删除文件路径
    * @return boolean 上传是否成功
    */
-  public static function privateUpload($bucketName, $ossKey, $filePath)
+  public static function privateUpload($bucketName, $ossKey, $filePath, $options = [])
   {
     $oss = new OSS(true);
     $oss->ossClient->setBucket($bucketName);
-    return $oss->ossClient->uploadFile($ossKey, $filePath);
+    return $oss->ossClient->uploadFile($ossKey, $filePath, $options);
   }
 
 
@@ -79,11 +79,11 @@ class OSS {
    * @param  string 删除传的变量
    * @return boolean 上传是否成功
    */
-  public static function publicUploadContent($bucketName, $ossKey, $content)
+  public static function publicUploadContent($bucketName, $ossKey, $content, $options = [])
   {
     $oss = new OSS();
     $oss->ossClient->setBucket($bucketName);
-    return $oss->ossClient->uploadContent($osskey, $content);
+    return $oss->ossClient->uploadContent($osskey, $content, $options);
   }
 
   /**
@@ -93,11 +93,11 @@ class OSS {
    * @param  string 删除传的变量
    * @return boolean 上传是否成功
    */
-  public static function privateUploadContent($bucketName, $ossKey, $content)
+  public static function privateUploadContent($bucketName, $ossKey, $content, $options = [])
   {
     $oss = new OSS(true);
     $oss->ossClient->setBucket($bucketName);
-    return $oss->ossClient->uploadContent($osskey, $content);
+    return $oss->ossClient->uploadContent($osskey, $content, $options);
   }
 
 
