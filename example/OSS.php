@@ -153,7 +153,7 @@ class OSS {
   {
     $oss = new OSS();
     $oss->ossClient->setBucket($bucketName);
-    return $oss->ossClient->getUrl($ossKey);
+    return $oss->ossClient->getPublicUrl($ossKey);
   }
   // 获取私有文件的URL，并设定过期时间，如 \DateTime('+1 day')
   public static function getPrivateObjectURLWithExpireTime($bucketName, $ossKey, DateTime $expire_time)
