@@ -32,8 +32,14 @@ AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项
 
 ```json
 require: {
-    "johnlui/aliyun-oss": "*"
+    "johnlui/aliyun-oss": "~1.3"
 }
+```
+
+或者运行命令：
+
+```bash
+composer require johnlui/aliyun-oss:~1.3
 ```
 
 然后运行 `composer update`。
