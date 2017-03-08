@@ -28,6 +28,10 @@ AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项
 
 ## 安装
 
+安装有两种方式：
+
+### ① 直接编辑配置文件
+
 将以下内容增加到 composer.json：
 
 ```json
@@ -36,13 +40,15 @@ require: {
 }
 ```
 
-或者运行命令：
+然后运行 `composer update`。
+
+### ② 执行命令安装
+
+运行命令：
 
 ```bash
 composer require johnlui/aliyun-oss:~1.3
 ```
-
-然后运行 `composer update`。
 
 ## 使用（以 Laravel 为例）
 
