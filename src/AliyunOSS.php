@@ -7,6 +7,8 @@ require_once __DIR__.'/oss/aliyun.php';
 use Aliyun\OSS\OSSClient;
 use Aliyun\OSS\Models\OSSOptions;
 
+use Exception;
+
 /**
  * \JohnLui\AliyunOSS
  * 唯一的 manager 类
@@ -59,17 +61,17 @@ class AliyunOSS
     $serverAddress = 'http://';
     if ($networkType == '经典网络') {
       if (!array_key_exists($city, $this->CityURLArray)) {
-        throw new \Exception("城市不存在");
+        throw new Exception("城市不存在");
       }
       $serverAddress .= $this->CityURLArray[$city];
       $serverAddress .= $isInternal ? '-internal' : '';
     } else if ($networkType == 'VPC') {
       if (!array_key_exists($city, $this->CityURLArrayForVPC)) {
-        throw new \Exception("城市不存在");
+        throw new Exception("城市不存在");
       }
       $serverAddress .= $this->CityURLArrayForVPC[$city];
     } else {
-      throw new \Exception("\$networkType 必须是 '经典网络' 或 'VPC'");
+      throw new Exception("\$networkType 必须是 '经典网络' 或 'VPC'");
     }
     $serverAddress .= '.aliyuncs.com';
 
@@ -119,11 +121,11 @@ class AliyunOSS
   public function getPublicUrl($key)
   {
     if ($this->networkType == 'VPC') {
-      throw new \Exception("经典网络才能获取公开 api");
+      throw new Exception("经典网络才能获取公开 api");
     }
 
     if (!array_key_exists($this->city, $this->CityURLArray)) {
-      throw new \Exception("城市不存在");
+      throw new Exception("城市不存在");
     }
 
     return 'http://'.$this->bucket.'.'.$this->CityURLArray[$this->city].'.aliyuncs.com'.'/'.$key;

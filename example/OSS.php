@@ -4,6 +4,9 @@ namespace App\Services;
 
 use JohnLui\AliyunOSS;
 
+use Exception;
+use DateTime;
+
 class OSS {
 
   /* 城市名称：
