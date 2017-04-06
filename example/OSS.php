@@ -84,7 +84,7 @@ class OSS {
   {
     $oss = new OSS();
     $oss->ossClient->setBucket($bucketName);
-    return $oss->ossClient->uploadContent($osskey, $content, $options);
+    return $oss->ossClient->uploadContent($ossKey, $content, $options);
   }
 
   /**
@@ -98,7 +98,7 @@ class OSS {
   {
     $oss = new OSS(true);
     $oss->ossClient->setBucket($bucketName);
-    return $oss->ossClient->uploadContent($osskey, $content, $options);
+    return $oss->ossClient->uploadContent($ossKey, $content, $options);
   }
 
 
@@ -178,10 +178,10 @@ class OSS {
     return $oss->ossClient->getAllObjectKey($bucketName);
   }
 
-  public static function getObjectMeta($bucketName, $osskey)
+  public static function getObjectMeta($bucketName, $ossKey)
   {
     $oss = new OSS();
-    return $oss->ossClient->getObjectMeta($bucketName, $osskey);
+    return $oss->ossClient->getObjectMeta($bucketName, $ossKey);
   }
 
 }
