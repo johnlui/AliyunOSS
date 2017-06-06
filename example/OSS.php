@@ -48,7 +48,7 @@ class OSS {
    * 使用外网上传文件
    * @param  string bucket名称
    * @param  string 上传之后的 OSS object 名称
-   * @param  string 删除文件路径
+   * @param  string 上传文件路径
    * @return boolean 上传是否成功
    */
   public static function publicUpload($bucketName, $ossKey, $filePath, $options = [])
@@ -62,7 +62,7 @@ class OSS {
    * 使用阿里云内网上传文件
    * @param  string bucket名称
    * @param  string 上传之后的 OSS object 名称
-   * @param  string 删除文件路径
+   * @param  string 上传文件路径
    * @return boolean 上传是否成功
    */
   public static function privateUpload($bucketName, $ossKey, $filePath, $options = [])
@@ -77,7 +77,7 @@ class OSS {
    * 使用外网直接上传变量内容
    * @param  string bucket名称
    * @param  string 上传之后的 OSS object 名称
-   * @param  string 删除传的变量
+   * @param  string 上传的变量
    * @return boolean 上传是否成功
    */
   public static function publicUploadContent($bucketName, $ossKey, $content, $options = [])
@@ -91,7 +91,7 @@ class OSS {
    * 使用阿里云内网直接上传变量内容
    * @param  string bucket名称
    * @param  string 上传之后的 OSS object 名称
-   * @param  string 删除传的变量
+   * @param  string 上传的变量
    * @return boolean 上传是否成功
    */
   public static function privateUploadContent($bucketName, $ossKey, $content, $options = [])
