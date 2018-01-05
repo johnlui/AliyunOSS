@@ -93,13 +93,35 @@ use App\Services\OSS;
 
 // 在外网上传一个文件并指定 options 如：Content-Type 类型
 // 更多 options 见：https://github.com/johnlui/AliyunOSS/blob/master/src/oss/src/Aliyun/OSS/OSSClient.php#L142-L148
-OSS::publicUpload('bucket', '目标 object 名', '本地文件路径', [
+OSS::publicUpload('bucket', '目标 object 名', '本地文件绝对路径', [
     'ContentType' => 'application/pdf',
     ... ...
 ]);
 ```
 
 更多用法等待着你去[发现](https://github.com/johnlui/AliyunOSS/blob/master/example/OSS.php)。
+
+### Symfony 3 用法示例
+
+如果你正在使用基于 Symfony 创建的第三方应用程序，而又恰好不懂命名空间及 Composer 自动加载，那么看下面就知道本库在 Symfony 中的用法了：
+
+#### 构建 Service 文件
+
+新建 `src/AppBundle/Services/OSS.php`，内容参考：[OSS.php](https://github.com/johnlui/AliyunOSS/blob/master/example/OSS.php)。
+
+修改顶部的命名空间为 `namespace AppBundle\Services;`。
+
+#### 放入自动加载
+
+无需配置。
+
+#### 使用
+
+```php
+use AppBundle\Services\OSS;
+
+OSS::publicUpload('bucket', '目标 object 名', '本地文件绝对路径');
+```
 
 ## 反馈
 
