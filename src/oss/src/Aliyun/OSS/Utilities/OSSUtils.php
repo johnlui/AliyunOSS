@@ -103,6 +103,10 @@ class OSSUtils {
                 $headers[OSSHeaders::OSS_USER_META_PREFIX . strtolower($key)] = $value;
             }
         }
+        
+        if (isset($options[OSSOptions::OBJECT_ACL])) {
+            $headers['x-oss-object-acl'] = $options[OSSOptions::OBJECT_ACL];
+        }
     }
 
     public static function buildEndpoint($endpoint, $bucket) {
