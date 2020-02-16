@@ -92,8 +92,8 @@ class GeneratePresignedUrlCommand {
             }
         }
         
-        if (isset($options[OSSOptions::ObjectAcl])) {
-            $builder->addHeader('x-oss-object-acl', $options[OSSOptions::ObjectAcl]);
+        if (isset($options[OSSOptions::OBJECT_ACL])) {
+            $builder->addHeader('x-oss-object-acl', $options[OSSOptions::OBJECT_ACL]);
         }
 
         // Overrides
