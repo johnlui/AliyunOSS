@@ -91,6 +91,10 @@ class GeneratePresignedUrlCommand {
                 $builder->addHeader(OSSHeaders::OSS_USER_META_PREFIX . $metakey, $value);
             }
         }
+        
+        if (isset($options[OSSOptions::ObjectAcl])) {
+            $builder->addHeader('x-oss-object-acl', $options[OSSOptions::ObjectAcl]);
+        }
 
         // Overrides
         $builder->addOverrides($options);
