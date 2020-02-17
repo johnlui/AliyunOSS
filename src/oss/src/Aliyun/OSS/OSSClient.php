@@ -146,6 +146,7 @@ class OSSClient {
      * <li><ContentType(string, 可选) - Content-Type请求头，表示Object内容的类型，为标准的MIME类型。</li>
      * <li>Expires(\DateTime, 可选) - Expires请求头，表示Object的过期时间</li>
      * <li>UserMetadata(array, 可选) - 用户自定义元数据，如 array('key1' => 'value1', 'key2' => 'value2') </li>
+     * <li>ObjectAcl(string, 可选) - 上传文件的读写权限，（'default', 'private', 'public-read', 'public-read-write'）</li>
      *
      * @return Models\PutObjectResult
      */
