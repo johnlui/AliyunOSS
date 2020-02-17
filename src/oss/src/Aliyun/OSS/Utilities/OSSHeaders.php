@@ -19,6 +19,7 @@ class OSSHeaders extends HttpHeaders {
     const OSS_USER_META_PREFIX = 'x-oss-meta-';
     
     const OSS_CANNED_ACL = 'x-oss-acl';
+    const OSS_OBJECT_ACL = 'x-oss-object-acl';
     const OSS_STORAGE_CLASS = 'x-oss-storage-class';
     const OSS_VERSION_ID = 'x-oss-version-id';
 
