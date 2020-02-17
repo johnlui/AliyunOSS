@@ -105,7 +105,7 @@ class OSSUtils {
         }
         
         if (isset($options[OSSOptions::OBJECT_ACL])) {
-            $headers['x-oss-object-acl'] = $options[OSSOptions::OBJECT_ACL];
+            $headers[OSSHeaders::OSS_OBJECT_ACL] = $options[OSSOptions::OBJECT_ACL];
         }
     }
 
