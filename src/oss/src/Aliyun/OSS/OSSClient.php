@@ -143,7 +143,7 @@ class OSSClient {
      * <li>ContentDisposition(string, 可选) - Content-Disposition请求头，表示MIME用户代理如何显示附加的文件。</li>
      * <li>CacheControl(string, 可选) - Cache-Control请求头，表示用户指定的HTTP请求/回复链的缓存行为。</li>
      * <li>ContentEncoding(string, 可选) - Content-Encoding请求头，表示Object内容的编码方式。</li>
-     * <li><ContentType(string, 可选) - Content-Type请求头，表示Object内容的类型，为标准的MIME类型。</li>
+     * <li>ContentType(string, 可选) - Content-Type请求头，表示Object内容的类型，为标准的MIME类型。</li>
      * <li>Expires(\DateTime, 可选) - Expires请求头，表示Object的过期时间</li>
      * <li>UserMetadata(array, 可选) - 用户自定义元数据，如 array('key1' => 'value1', 'key2' => 'value2') </li>
      *
