@@ -27,6 +27,7 @@ class OSSOptions extends ServiceOptions {
     const EXPIRES = 'Expires';
     const USER_METADATA = 'UserMetadata';
     const CONTENT_TYPE = 'ContentType';
+    const OBJECT_ACL = 'ObjectAcl';
 
     const DELIMITER = 'Delimiter';
     const MARKER = 'Marker';
