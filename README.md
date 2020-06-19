@@ -12,6 +12,7 @@ AliyunOSS
 
 AliyunOSS 是阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项目，包括 Laravel、Symfony、TinyLara 等等。
 
+#### 适配 Laravel 7 的新包已经发布：[AliyunOSS-Laravel7](https://github.com/johnlui/AliyunOSS-Laravel7)
 
 ## 更新记录
 
